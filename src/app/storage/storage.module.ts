@@ -9,6 +9,7 @@ import { GridStorageComponent } from './components/grid-storage/grid-storage.com
 
 import { StorageRoutingModule } from './storage-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { StorageService } from './services/storage.service';
 import { ProductModalComponent } from './components/product-modal/product-modal.component';
@@ -25,8 +26,10 @@ import { ProductModalComponent } from './components/product-modal/product-modal.
   imports: [
     CommonModule,
     StorageRoutingModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    NgbModule
   ],
+  entryComponents:[ProductModalComponent],
   providers: [StorageService]
 })
 export class StorageModule { }

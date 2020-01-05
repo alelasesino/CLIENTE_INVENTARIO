@@ -1,1 +1,30 @@
-<p>product-modal works!</p>
+<div class="row row-height">
+
+    <div *ngFor="let product of products" class="col-md-6 col-sm-12 column-custom" (click)="activeModal.close('product.id')">
+
+        <div class="card h-100" [style.background-color]="product.color" style="border-radius: 0;">
+            <div class="card-body card-custom">
+                <h1>{{product.nombre}}</h1>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--
+    <div class="modal-header">
+    <h4 class="modal-title">Hi there!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p>Hello</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Product 2')">Producto 1</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Product 1')">Producto 2</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
+-->

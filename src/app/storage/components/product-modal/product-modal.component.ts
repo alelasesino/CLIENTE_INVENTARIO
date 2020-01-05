@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-product-modal',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductModalComponent implements OnInit {
 
-  constructor() { }
+  products: any = [];
+
+  constructor(private service:StorageService, public activeModal: NgbActiveModal) { 
+    service.getProducts().subscribe(
+      data => {
+        this.products = data;
+        console.log(data);
+        
+      }, error => console.error(error)
+    );
+  }
 
   ngOnInit() {
   }
