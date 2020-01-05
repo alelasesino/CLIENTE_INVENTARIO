@@ -11,6 +11,7 @@ import { StorageRoutingModule } from './storage-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { StorageService } from './services/storage.service';
+import { ProductModalComponent } from './components/product-modal/product-modal.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StorageService } from './services/storage.service';
     FincaSelectionComponent,
     ParcelaSelectionComponent,
     AdminStorageComponent,
-    GridStorageComponent
+    GridStorageComponent,
+    ProductModalComponent
   ],
   imports: [
     CommonModule,
