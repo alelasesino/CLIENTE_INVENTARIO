@@ -1,0 +1,15 @@
+<div class="container-fluid h-100" style="background-color: rgba(0, 0, 0, 0.11);">
+    <div class="row row-height">
+
+        <div *ngFor="let finca of fincas" class="col-md-6 col-sm-12 column-custom" routerLink="/fincas/{{finca.id}}/parcelas">
+
+            <div class="card h-100" [style.background-color]="finca.color" style="border-radius: 0;">
+                <div class="card-body card-custom">
+                    <h1>{{finca.nombre}}</h1>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
