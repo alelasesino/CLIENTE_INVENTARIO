@@ -21,4 +21,8 @@ export class StorageService {
     return this.http.get(`${this.API_URI}/fincas/${id_finca}/parcelas`);
   }
 
+  getParcelaAlmacen(id_parcela:string) {
+    return this.http.get(`${this.API_URI}/parcelas/${id_parcela}/almacen`);
+  }
+
 }

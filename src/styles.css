@@ -6,3 +6,23 @@ body {
     width: 100%;
     margin: 0 auto;
 }
+
+.ag-row .ag-cell,
+.ag-header-cell-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+}
+
+.ag-header-cell-label {
+    font-size: 25px;
+}
+
+.ag-row .ag-cell {
+    font-size: 35px;
+}
+
+.ag-cell-label-container {
+    background-color: rebeccapurple;
+}
