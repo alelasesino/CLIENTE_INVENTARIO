@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { StorageService } from '../../services/storage.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { StorageService } from '../../services/storage.service';
 })
 export class KeypadModalComponent implements OnInit {
 
+  idProductSelected: string;
   productSelected: string;
   displayValue: string = "0";
   firtClick: boolean = true;
@@ -22,7 +24,7 @@ export class KeypadModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private service:StorageService) { }
 
   ngOnInit() {
-    this.service.getProduct(this.productSelected).subscribe(
+    this.service.getProduct(this.idProductSelected).subscribe(
       (data:any) => {
         this.productSelected = data[0].nombre;
       },

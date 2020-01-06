@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { StorageService } from '../../services/storage.service';
+
 import { ProductModalComponent } from '../product-modal/product-modal.component';
 import { KeypadModalComponent } from '../keypad-modal/keypad-modal.component';
 
@@ -14,7 +16,7 @@ export class AdminStorageComponent implements OnInit {
   private modalRef;
   private productSelected;
 
-  constructor(public modalService: NgbModal) { }
+  constructor(public modalService: NgbModal, private service: StorageService) { }
 
   ngOnInit() {
   }
@@ -26,7 +28,7 @@ export class AdminStorageComponent implements OnInit {
 
   openKeypadModal(result) {
     this.modalRef = this.modalService.open(KeypadModalComponent, { size: 'xl', centered: true });
-    this.modalRef.componentInstance.productSelected = result;
+    this.modalRef.componentInstance.idProductSelected = result;
     this.modalRef.result.then(result => this.onKeypadModalClosed(result), dismiss => {});
   }
 
