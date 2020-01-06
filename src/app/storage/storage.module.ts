@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { StorageService } from './services/storage.service';
 import { ProductModalComponent } from './components/product-modal/product-modal.component';
+import { KeypadModalComponent } from './components/keypad-modal/keypad-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProductModalComponent } from './components/product-modal/product-modal.
     ParcelaSelectionComponent,
     AdminStorageComponent,
     GridStorageComponent,
-    ProductModalComponent
+    ProductModalComponent,
+    KeypadModalComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,7 @@ import { ProductModalComponent } from './components/product-modal/product-modal.
     AgGridModule.withComponents([]),
     NgbModule
   ],
-  entryComponents:[ProductModalComponent],
+  entryComponents:[ProductModalComponent, KeypadModalComponent],
   providers: [StorageService]
 })
 export class StorageModule { }

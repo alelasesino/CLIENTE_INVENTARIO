@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProductModalComponent } from '../product-modal/product-modal.component';
+import { KeypadModalComponent } from '../keypad-modal/keypad-modal.component';
 
 @Component({
   selector: 'app-admin-storage',
@@ -11,6 +12,7 @@ import { ProductModalComponent } from '../product-modal/product-modal.component'
 export class AdminStorageComponent implements OnInit {
 
   private modalRef;
+  private productSelected;
 
   constructor(public modalService: NgbModal) { }
 
@@ -19,12 +21,17 @@ export class AdminStorageComponent implements OnInit {
 
   openProductModal() {
     this.modalRef = this.modalService.open(ProductModalComponent, { size: 'xl', centered: true });
-    this.modalRef.componentInstance.productSelected = 'Ninguno';
-    this.modalRef.result.then(result => this.onProductModalClosed(result), dismiss => {});
+    this.modalRef.result.then(result => this.openKeypadModal(result), dismiss => {});
   }
 
-  onProductModalClosed(result) {
-    console.log(result);
+  openKeypadModal(result) {
+    this.modalRef = this.modalService.open(KeypadModalComponent, { size: 'xl', centered: true });
+    this.modalRef.componentInstance.productSelected = result;
+    this.modalRef.result.then(result => this.onKeypadModalClosed(result), dismiss => {});
+  }
+
+  onKeypadModalClosed(result) {
+    console.log('Numero de cajas:', result);
   }
 
 }

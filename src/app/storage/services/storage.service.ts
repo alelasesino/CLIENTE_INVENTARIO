@@ -29,4 +29,8 @@ export class StorageService {
     return this.http.get(`${this.API_URI}/articulos`);
   }
 
+  getProduct(id_articulo:string) {
+    return this.http.get(`${this.API_URI}/articulos/${id_articulo}`);
+  }
+
 }
