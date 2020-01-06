@@ -1,6 +1,6 @@
 <div class="row row-height">
 
-    <div *ngFor="let product of products" class="col-md-6 col-sm-12 column-custom" (click)="activeModal.close('product.id')">
+    <div *ngFor="let product of products" class="col-md-6 col-sm-12 column-custom" (click)="activeModal.close(product.id)">
 
         <div class="card h-100" [style.background-color]="product.color" style="border-radius: 0;">
             <div class="card-body card-custom">

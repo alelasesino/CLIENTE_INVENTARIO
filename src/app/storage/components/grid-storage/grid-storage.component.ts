@@ -18,9 +18,13 @@ export class GridStorageComponent implements OnInit {
   ];
 
   rowData:any = [];
+  gridApi;
 
   headerHeight = 45;
   rowHeight = 70;
+
+  rowSelection = "single";
+  selectedRows;
 
   /*id_finca:string;
   id_parcela:string;*/
@@ -52,8 +56,15 @@ export class GridStorageComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSelectionChanged() {
+    this.selectedRows = this.gridApi.getSelectedRows()[0];
+    console.log(this.selectedRows);
+    
+  }
+
   onGridReady(params){
-    params.api.sizeColumnsToFit();
+    this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
   }
 
 }
