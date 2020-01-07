@@ -11,10 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 export class GridStorageComponent implements OnInit {
 
   columnDefs = [
-    {headerName: "ARTICULO", field: 'articulo.nombre'},
-    {headerName: "HORA", field: 'fecha'},
-    {headerName: "STOCK", field: 'stock'},
-    {headerName: "KILOS", field: 'kilos'}
+    {headerName: "ID", field: 'id', hide: true},
+    {headerName: "ARTICULO", field: 'articulo.nombre', width: 100},
+    {headerName: "HORA", field: 'fecha', width: 50},
+    {headerName: "CAJAS", field: 'cajas', width: 50},
+    {headerName: "KILOS", field: 'kilos', width: 50}
   ];
 
   rowData:any = [];
@@ -26,15 +27,9 @@ export class GridStorageComponent implements OnInit {
   rowSelection = "single";
   selectedRows;
 
-  /*id_finca:string;
-  id_parcela:string;*/
-
   constructor(private service:StorageService, private activedRoute: ActivatedRoute) { 
     
     const params = activedRoute.snapshot.params;
-
-    /*this.id_finca = params.id_finca;
-    this.id_parcela = params.id_parcela;*/
     
     service.getParcelaAlmacen(params.id_parcela).subscribe(
       data => {
@@ -43,8 +38,8 @@ export class GridStorageComponent implements OnInit {
         this.rowData.forEach(element => {
           
           const fecha = new Date(element.fecha);
-          element.fecha = fecha.getUTCHours() + ":" + fecha.getUTCMinutes();
-
+          element.fecha = fecha.getHours() + ":" + fecha.getMinutes();
+          
         });
 
       },

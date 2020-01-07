@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient } from '@angular/common/http';
-
-import { Parcela } from '../models/parcela';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +11,27 @@ export class StorageService {
 
   constructor(private http:HttpClient) { }
 
-  getFincas() {
+  getLote(id_parcela: string): Observable<Object> {
+    return this.http.get(`${this.API_URI}/parcelas/${id_parcela}/lote`);
+  }
+
+  getFincas(): Observable<Object> {
     return this.http.get(`${this.API_URI}/fincas`);
   }
 
-  getParcelas(id_finca: string) {
+  getFinca(id_finca: string): Observable<Object> {
+    return this.http.get(`${this.API_URI}/fincas/${id_finca}`);
+  }
+
+  getParcelas(id_finca: string): Observable<Object> {
     return this.http.get(`${this.API_URI}/fincas/${id_finca}/parcelas`);
   }
 
-  getParcelaAlmacen(id_parcela:string) {
+  getParcela(id_parcela: string): Observable<Object> {
+    return this.http.get(`${this.API_URI}/parcelas/${id_parcela}`);
+  }
+
+  getParcelaAlmacen(id_parcela:string): Observable<Object> {
     return this.http.get(`${this.API_URI}/parcelas/${id_parcela}/almacen`);
   }
 
@@ -29,8 +39,16 @@ export class StorageService {
     return this.http.get(`${this.API_URI}/articulos`);
   }
 
-  getProduct(id_articulo:string) {
+  getProduct(id_articulo:string): Observable<Object> {
     return this.http.get(`${this.API_URI}/articulos/${id_articulo}`);
+  }
+
+  addAlmacen(linea_almacen): Observable<Object> {
+    return this.http.put(`${this.API_URI}/almacen/add`, linea_almacen);
+  }
+
+  deleteAlmacen(id_linea): Observable<Object> {
+    return this.http.put(`${this.API_URI}/almacen/delete`, id_linea);
   }
 
 }
