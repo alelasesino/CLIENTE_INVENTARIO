@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -6,6 +6,7 @@ import { StorageService } from '../../services/storage.service';
 
 import { ProductModalComponent } from '../product-modal/product-modal.component';
 import { KeypadModalComponent } from '../keypad-modal/keypad-modal.component';
+import { GridStorageComponent } from '../grid-storage/grid-storage.component';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { KeypadModalComponent } from '../keypad-modal/keypad-modal.component';
   styleUrls: ['./admin-storage.component.css']
 })
 export class AdminStorageComponent implements OnInit {
+
+  @ViewChild("grid", {static: false}) grid: GridStorageComponent;
 
   modalRef: any;
   params: any;
@@ -24,6 +27,7 @@ export class AdminStorageComponent implements OnInit {
   constructor(public modalService: NgbModal, private service: StorageService, private activedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    
     this.params = this.activedRoute.snapshot.params;
 
     this.service.getFinca(this.params.id_finca).subscribe(
@@ -70,8 +74,7 @@ export class AdminStorageComponent implements OnInit {
 
     this.service.addAlmacen(linea_almacen).subscribe(
       data => {
-        console.log(data);
-        //REFRESH GRID
+        this.grid.updateDataGridFromApi();
       },
       error => console.error(error)
     );
@@ -79,6 +82,19 @@ export class AdminStorageComponent implements OnInit {
   }
 
   onDeleteClick():void {
+
+    const rowSelected = this.grid.rowSelected;
+    
+    if(rowSelected != undefined) {
+      this.service.deleteAlmacen(rowSelected.id).subscribe(
+        data => {
+          this.grid.updateDataGridFromApi();
+          console.log(data);
+                    
+        },
+        error => console.error(error)
+      );
+    }
     
   }
 

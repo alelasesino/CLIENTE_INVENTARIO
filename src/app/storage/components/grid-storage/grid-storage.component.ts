@@ -12,10 +12,10 @@ export class GridStorageComponent implements OnInit {
 
   columnDefs = [
     {headerName: "ID", field: 'id', hide: true},
-    {headerName: "ARTICULO", field: 'articulo.nombre', width: 100},
-    {headerName: "HORA", field: 'fecha', width: 50},
-    {headerName: "CAJAS", field: 'cajas', width: 50},
-    {headerName: "KILOS", field: 'kilos', width: 50}
+    {headerName: "ARTICULO", field: 'articulo.nombre', width: 120},
+    {headerName: "HORA", field: 'fecha', width: 40, sortable: true},
+    {headerName: "CAJAS", field: 'cajas', width: 40},
+    {headerName: "KILOS", field: 'kilos', width: 40}
   ];
 
   rowData:any = [];
@@ -25,36 +25,32 @@ export class GridStorageComponent implements OnInit {
   rowHeight = 70;
 
   rowSelection = "single";
-  selectedRows;
+  rowSelected;
 
-  constructor(private service:StorageService, private activedRoute: ActivatedRoute) { 
-    
-    const params = activedRoute.snapshot.params;
-    
-    service.getParcelaAlmacen(params.id_parcela).subscribe(
+  constructor(private service:StorageService, private activedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.updateDataGridFromApi();
+  }
+
+  updateDataGridFromApi() {
+    const params = this.activedRoute.snapshot.params;
+    this.service.getParcelaAlmacen(params.id_parcela).subscribe(
       data => {
 
         this.rowData = data;
-        this.rowData.forEach(element => {
-          
-          const fecha = new Date(element.fecha);
-          element.fecha = fecha.getHours() + ":" + fecha.getMinutes();
-          
+        this.rowData.forEach(element => {  
+          element.fecha = new Date(element.fecha).toISOString().substr(11, 5);
         });
 
       },
       error => console.log(error)
     );
-
-   }
-
-  ngOnInit() {
+    
   }
 
   onSelectionChanged() {
-    this.selectedRows = this.gridApi.getSelectedRows()[0];
-    console.log(this.selectedRows);
-    
+    this.rowSelected = this.gridApi.getSelectedRows()[0];
   }
 
   onGridReady(params){

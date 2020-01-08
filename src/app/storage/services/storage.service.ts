@@ -48,7 +48,7 @@ export class StorageService {
   }
 
   deleteAlmacen(id_linea): Observable<Object> {
-    return this.http.put(`${this.API_URI}/almacen/delete`, id_linea);
+    return this.http.request('delete', `${this.API_URI}/almacen/delete/${id_linea}`);
   }
 
 }
