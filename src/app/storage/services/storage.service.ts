@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import keys from '../../keys'
+
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  API_URI = "http://localhost:3000";
+  API_URI = keys.API_URI
 
   constructor(private http:HttpClient) { }
 
